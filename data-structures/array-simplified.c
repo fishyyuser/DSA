@@ -137,6 +137,22 @@ void sortArray(){
     printf("\n\n\n\t\t************ Sorted Array ***********\n");
     displayArray();
 }
+//implementing insertion sort on the array
+void insertionSortArray(){
+    int len=t;
+    int i, key, j;
+    for (i = 1; i < len; i++) {
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+    printf("\n\n\n\t\t************ Sorted Array ***********\n");
+    displayArray();
+}
 int main(){
     int choice,ch,index;
     printf("Array Created\n");
@@ -144,7 +160,7 @@ int main(){
     
     displayArray();
     while(1){
-        printf("\nMENU\n1.Traverse\n2.Insert\n3.Delete\n4.Linear Search\n5.Sort using Selection Sort\n");
+        printf("\nMENU\n1.Traverse\n2.Insert\n3.Delete\n4.Linear Search\n5.Sort using Selection Sort\n6.Sort using Insetion Sort\n7.Exit\n");
     scanf("%d",&choice);
     switch (choice)
     {
@@ -220,11 +236,18 @@ int main(){
             sortArray();
         }
         break;
-    
-    default:
-        printf("Invalid Choice!!!\n\nExiting...");
+    case 6:
+        {
+            printf("Array Befor Sorting\n");
+            displayArray();
+            insertionSortArray();
+        }
+        break;
+    case 7:
+        printf("Exiting...\n");
         exit(1);
-        return 0;
+    default:
+        printf("Invalid Choice!!!\n");
     }
     }
     return 0;

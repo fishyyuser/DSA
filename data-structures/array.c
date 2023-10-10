@@ -71,8 +71,6 @@ void insertAt(int *ptr,int *i,int index){
         len++;
         ptr[index]=element;
         *i=len;
-    }else{
-        printf("\n\n******** Index Out of Bounds **********\n\n");
     }
 }
 void insertAtBegin(int *ptr,int *i){
@@ -88,10 +86,7 @@ void deleteAt(int *ptr,int *i,int index){
     if((*i)==-1){
         printf("\n\n******** Empty Array **********\n\n");
         return;
-    }else if((*i)<index){
-        printf("\n\n******** Index Out of Bounds **********\n\n");
-    }
-    else{
+    }else{
         for(int j=index;j<len;j++){
             ptr[j]=ptr[j+1];
         }
@@ -121,7 +116,7 @@ void sortArray(int *ptr,int *i){
     int len=*i;
     int temp,min;
     
-    for (int j=0;j<=len;j++){
+    for (int j=0;j<=len-1;j++){
         min=j;
         for(int k=j+1;k<=len;k++){
             if(ptr[min]>ptr[k]){
@@ -132,10 +127,26 @@ void sortArray(int *ptr,int *i){
             temp=ptr[j];
             ptr[j]=ptr[min];
             ptr[min]=temp;
-            }
+        }
     }
     printf("\n\n\n\t\t************ Sorted Array ***********\n");
     displayArray(ptr,i);
+}
+//implementing insertion sort on the array
+void insertionSortArray(int *ptr,int *z){
+    int len=*z;
+    int i, key, j;
+    for (i = 1; i < len; i++) {
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+    printf("\n\n\n\t\t************ Sorted Array ***********\n");
+    displayArray(ptr,z);
 }
 int main(){
     int choice,ctr,ch,index;
@@ -145,7 +156,7 @@ int main(){
     
     displayArray(arr,&ctr);
     while(1){
-        printf("\nMENU\n1.Traverse\n2.Insert\n3.Delete\n4.Linear Search\n5.Sort using Selection Sort\n");
+        printf("\nMENU\n1.Traverse\n2.Insert\n3.Delete\n4.Linear Search\n5.Sort using Selection Sort\n6.Sort using Insetion Sort\n7.Exit\n");
     scanf("%d",&choice);
     switch (choice)
     {
@@ -222,9 +233,18 @@ int main(){
         }
         break;
     
-    default:
-        printf("Invalid Choice!!!\n\nExiting...");
+    case 6:
+        {
+            printf("Array Befor Sorting\n");
+            displayArray(arr,&ctr);
+            insertionSortArray(arr,&ctr);
+        }
+        break;
+    case 7:
+        printf("Exiting...\n");
         exit(1);
+    default:
+        printf("Invalid Choice!!!\n");
     }
     }
     return 0;

@@ -162,11 +162,7 @@ void deleteTail(struct Node **head, struct Node **tail)
         printf("\n\n\t\t*********** List Deleted *******\n\n\n");
         return;
     }
-    struct Node *temp = *head;
-    while (temp->next != (*tail))
-    {
-        temp = temp->next;
-    }
+    struct Node *temp = (*tail)->prev;
     // for circular list
     if ((*tail)->next == (*head))
     {
