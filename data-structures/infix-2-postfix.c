@@ -99,7 +99,6 @@ bool checkInfix(){
         }
         
         if(!isOperator(currentChar) && !isOperand(currentChar)&& currentChar!='\n'){
-            //printf("\n1\n");
             return false;
         }
         if (currentChar == '(') {
@@ -107,21 +106,17 @@ bool checkInfix(){
         } else if (currentChar == ')') {
             parenthesesBalance--;
             if (parenthesesBalance < 0) {
-                //printf("\n2\n");
                 return false; // Unbalanced parentheses
             }
         }else if(infix[0]==')'||infix[len-1]=='('){
-            //printf("\n3\n");
             return false;
         }
          else if (isOp(currentChar)) {
             if (i == 0 || i == len - 1 || isOp(infix[i - 1]) || isOp(infix[i + 1])) {
-                //printf("\n4\n");
                 return false; // Invalid operator placement
             }
         }else if (isOperand(currentChar)) {
             if (i > 0 && isOperand(infix[i - 1])) {
-                //printf("\n5\n");
                 return false; // Adjacent operands without an operator
             }
         }
